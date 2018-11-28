@@ -3,6 +3,7 @@ import '../css/App.css';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import Header from './Header';
+import { BrowserRouter } from 'react-router-dom'
 
 firebase.initializeApp({
   apiKey: "AIzaSyAb3DecniPkMErcRr2GebYvigm_giFi7YE",
@@ -37,8 +38,6 @@ class App extends Component {
         <span>
           <div> Signed In! </div>
           <button onClick={() => firebase.auth().signOut()}> Sign out! </button>
-          <h1> Welcome {firebase.auth().currentUser.displayName}</h1>
-          <img alt = "profile picture" src={firebase.auth().currentUser.photoURL}/>
         </span>
       ) : (
         <div authButtons>
