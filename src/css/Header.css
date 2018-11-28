@@ -1,0 +1,9 @@
+.App-header{
+  background-color: white;
+  color: black;
+  justify-content: flex-start;
+}
+
+.App-header.h2{
+  text-align: left;
+}
