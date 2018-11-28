@@ -20,3 +20,15 @@
 .App-link {
   color: #61dafb;
 }
+
+.content button{
+    float: right;
+    margin: 1%;
+    font-size: 30px;
+
+}
+
+h1.greeting{
+  float: left;
+  padding-left: 1%;
+}
