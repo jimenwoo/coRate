@@ -35,8 +35,7 @@ class App extends Component {
       <div className = "App">
       {this.state.isSignedIn ? (
         <div class = "content">
-        asas
-        <h1 class = "greeting"> Welcome {firebase.auth().currentUser.displayName}</h1>
+          <h1 class = "greeting"> Welcome {firebase.auth().currentUser.displayName}</h1>
           <button onClick={() => firebase.auth().signOut()}> Sign out! </button>
           <Rating/>
         </div>
