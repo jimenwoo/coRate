@@ -5,6 +5,8 @@ import Main from './components/Main';
 import * as serviceWorker from './serviceWorker';
 import { render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
+import 'react-mdl/extra/material.css'
+import 'react-mdl/extra/material.js'
 
 render((
   <BrowserRouter>

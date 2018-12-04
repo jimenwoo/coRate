@@ -4,6 +4,9 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import Header from './Header';
 import Rating from './Rating';
+import Main from './Main';
+import {Link } from 'react-router-dom';
+
 firebase.initializeApp({
   apiKey: "AIzaSyAb3DecniPkMErcRr2GebYvigm_giFi7YE",
   authDomain: "corate-4b30a.firebaseapp.com"
@@ -38,6 +41,7 @@ class App extends Component {
           <h1 class = "greeting"> Welcome {firebase.auth().currentUser.displayName}</h1>
           <button onClick={() => firebase.auth().signOut()}> Sign out! </button>
           <Rating/>
+          
         </div>
       ) : (
         <div authButtons>

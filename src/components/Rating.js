@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
-import testing from './testing';
+import Profile from './Profile';
+import {Link } from 'react-router-dom';
 
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
@@ -10,18 +11,21 @@ class Rating extends Component{
   render() {
       return(
         <div className ="tunechi">
-          <Card>
+        <Card>
         <CardImg top width="25%" src="https://imgflip.com/s/meme/Bad-Luck-Brian.jpg" alt="Card image cap" />
         <CardBody>
           <CardTitle>Brian Luk</CardTitle>
           <CardSubtitle>President</CardSubtitle>
           <CardText>In search for better luck.</CardText>
-          <Button onClick={() => <testing/>} >Rate me!</Button>
-          <testing/>
+          {/* <Button onClick={() => <Profile/>} >Rate me!</Button> */}
+          <Link to="/Profile">
+          <button > Rate Me! </button>
+          </Link>
+          
         </CardBody>
       </Card>
 
-      <Card>
+      {/* <Card>
         <CardImg top width="25%" src="http://www.radioacktiva.com/wp-content/uploads/2018/02/pp550x550.jpg" alt="Card image cap" />
         <CardBody>
           <CardTitle>Card title</CardTitle>
@@ -49,7 +53,7 @@ class Rating extends Component{
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button>Button</Button>
         </CardBody>
-      </Card>
+      </Card> */}
         </div>
       )
   }
