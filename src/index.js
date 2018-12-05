@@ -8,10 +8,13 @@ import { BrowserRouter } from 'react-router-dom'
 import 'react-mdl/extra/material.css'
 import 'react-mdl/extra/material.js'
 
-render((
-  <BrowserRouter>
-    <Main />
-  </BrowserRouter>), document.getElementById('root')
+import { makeMainRoutes } from './routes';
+
+const routes = makeMainRoutes();
+
+ReactDOM.render(
+  routes,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

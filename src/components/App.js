@@ -74,58 +74,73 @@ addNote(note){
       this.setState({isSignedIn:!!user})
     })
   }
+  login() {
+    this.props.auth.login();
+  }
   render() {
+    
+    const { isAuthenticated } = this.props.auth;
     return (
       <div className = "App">
-      {this.state.isSignedIn ? (
-        <div class = "content">
-          <h1 class = "greeting"> Welcome {firebase.auth().currentUser.displayName}</h1>
-          <button onClick={() => firebase.auth().signOut()}> Sign out! </button>
-          {/* <Rating/> */}
+        {
 
-          <Card>
-        <CardImg top width="25%" src="https://www.lifewire.com/thmb/L-aLC8zjGWcu-ROZWlsbm0icK0Y=/1600x900/filters:no_upscale():fill(FFCC00,1)/Aliens-5ad4ee9231283400363d13c4.jpg" alt="Card image cap" />
-        <CardBody>
-          <CardTitle>John Smith</CardTitle>
-          <CardSubtitle>Extraterrestrial Scientist</CardSubtitle>
-          <CardText>Astronomy Department</CardText>
-          
-          {/* <Link to="/Profile">
-          <button > Rate Me! </button>
-          </Link> */}
-
-          <div className="notesWrapper">
-        <div className="notesHeader">
-        </div>
-        <div className="notesBody">
-          {
-            this.state.notes.map((note) => {
-              return (
-                <Note noteContent={note.noteContent} 
-                noteId={note.id} 
-                key={note.id} 
-                />
-              )
-            })
-          }
-        </div>
-        <div className="notesFooter">
-          <NoteForm addNote={this.addNote} />
-        </div>
-      </div>
-          
-        </CardBody>
-      </Card>
-          
-        </div>
-      ) : (
-        <div authButtons>
-        <StyledFirebaseAuth
-          uiConfig={this.uiConfig}
-          firebaseAuth={firebase.auth()}
-          />
-          </div>
-      )}
+          isAuthenticated() && (
+            <div>
+            <h4>
+              You are logged in!
+              
+              </h4>
+              
+              <Card>
+              <CardImg top width="25%" src="https://www.lifewire.com/thmb/L-aLC8zjGWcu-ROZWlsbm0icK0Y=/1600x900/filters:no_upscale():fill(FFCC00,1)/Aliens-5ad4ee9231283400363d13c4.jpg" alt="Card image cap" />
+              <CardBody>
+                <CardTitle>John Smith</CardTitle>
+                <CardSubtitle>Extraterrestrial Scientist</CardSubtitle>
+                <CardText>Astronomy Department</CardText>
+                
+                {/* <Link to="/Profile">
+                <button > Rate Me! </button>
+                </Link> */}
+      
+                <div className="notesWrapper">
+              <div className="notesHeader">
+              </div>
+              <div className="notesBody">
+                {
+                  this.state.notes.map((note) => {
+                    return (
+                      <Note noteContent={note.noteContent} 
+                      noteId={note.id} 
+                      key={note.id} 
+                      />
+                    )
+                  })
+                }
+              </div>
+              <div className="notesFooter">
+                <NoteForm addNote={this.addNote} />
+              </div>
+            </div>
+                
+              </CardBody>
+            </Card>
+            </div>
+          )
+        }
+        {
+          !isAuthenticated() && (
+            <h4>
+              You are not logged in! Please{' '}
+              <a
+                style={{ cursor: 'pointer' }}
+                onClick={this.login.bind(this)}
+              >
+                Log In
+                </a>
+              {' '}to continue.
+              </h4>
+          )
+        }
       </div>
     );
   }
