@@ -22,13 +22,18 @@
 }
 
 .content button{
-    float: right;
+    float: top;
     margin: 1%;
     font-size: 30px;
 
 }
 
 h1.greeting{
-  float: left;
+  float: unset;
   padding-left: 1%;
+  font-size: 26px;
+}
+
+.App{
+  text-align: center;
 }

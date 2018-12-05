@@ -7,15 +7,56 @@ import Rating from './Rating';
 import Main from './Main';
 import {Link } from 'react-router-dom';
 
-firebase.initializeApp({
-  apiKey: "AIzaSyAb3DecniPkMErcRr2GebYvigm_giFi7YE",
-  authDomain: "corate-4b30a.firebaseapp.com"
-})
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button } from 'reactstrap';
+
+  import Note from './Note';
+  import NoteForm from './NoteForm';
+  import { DB_CONFIG } from './config';
+  import 'firebase/database';
+
+
 
 class App extends Component {
-  state = {
-   isSignedIn: false
- }
+
+
+constructor(props){
+  super(props);
+  this.addNote = this.addNote.bind(this);
+  
+
+  this.app = firebase.initializeApp(DB_CONFIG);
+  this.database = this.app.database().ref().child('comment');
+
+  
+  this.state = {
+    notes: [],
+  }
+}
+componentWillMount(){
+  const previousNotes = this.state.notes;
+
+  
+  this.database.on('child_added', snap => {
+    previousNotes.push({
+      id: snap.key,
+      noteContent: snap.val().noteContent,
+    })
+
+    this.setState({
+      notes: previousNotes
+    })
+  })
+
+  
+}
+
+addNote(note){
+  this.database.push().set({ noteContent: note});
+}
+
+
+
   uiConfig = {
   signInFlow: "popup",
   signInOptions: [
@@ -40,7 +81,41 @@ class App extends Component {
         <div class = "content">
           <h1 class = "greeting"> Welcome {firebase.auth().currentUser.displayName}</h1>
           <button onClick={() => firebase.auth().signOut()}> Sign out! </button>
-          <Rating/>
+          {/* <Rating/> */}
+
+          <Card>
+        <CardImg top width="25%" src="https://www.lifewire.com/thmb/L-aLC8zjGWcu-ROZWlsbm0icK0Y=/1600x900/filters:no_upscale():fill(FFCC00,1)/Aliens-5ad4ee9231283400363d13c4.jpg" alt="Card image cap" />
+        <CardBody>
+          <CardTitle>John Smith</CardTitle>
+          <CardSubtitle>Extraterrestrial Scientist</CardSubtitle>
+          <CardText>Astronomy Department</CardText>
+          
+          {/* <Link to="/Profile">
+          <button > Rate Me! </button>
+          </Link> */}
+
+          <div className="notesWrapper">
+        <div className="notesHeader">
+        </div>
+        <div className="notesBody">
+          {
+            this.state.notes.map((note) => {
+              return (
+                <Note noteContent={note.noteContent} 
+                noteId={note.id} 
+                key={note.id} 
+                />
+              )
+            })
+          }
+        </div>
+        <div className="notesFooter">
+          <NoteForm addNote={this.addNote} />
+        </div>
+      </div>
+          
+        </CardBody>
+      </Card>
           
         </div>
       ) : (
