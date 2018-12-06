@@ -77,6 +77,10 @@ addNote(note){
   login() {
     this.props.auth.login();
   }
+
+  logout() {
+    this.props.auth.logout();
+  }
   render() {
     
     const { isAuthenticated } = this.props.auth;
@@ -90,6 +94,13 @@ addNote(note){
               You are logged in!
               
               </h4>
+
+              <a
+                style={{ cursor: 'pointer' }}
+                onClick={this.logout.bind(this)}
+              >
+                Log out
+                </a>
               
               <Card>
               <CardImg top width="25%" src="https://www.lifewire.com/thmb/L-aLC8zjGWcu-ROZWlsbm0icK0Y=/1600x900/filters:no_upscale():fill(FFCC00,1)/Aliens-5ad4ee9231283400363d13c4.jpg" alt="Card image cap" />
